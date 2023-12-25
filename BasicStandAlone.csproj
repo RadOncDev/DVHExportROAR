@@ -38,6 +38,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UMRO.Libs.DVHAnalysis-2.0.3.0">
+      <HintPath>\\uhrofilespr1\EclipseScripts\Aria15\Development\JY\Download\temp\chuckdvhbatch\UMRO.Libs.DVHAnalysis\UMRO.Libs.DVHAnalysis-2.0.3.0.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -51,7 +54,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalysisData.cs" />
+    <Compile Include="AnalysisPlan.cs" />
     <Compile Include="BasicStandAlone.cs" />
+    <Compile Include="DeliveredDoseDVHModel.cs" />
+    <Compile Include="DvhAnalysis.cs" />
+    <Compile Include="DvhAnalysisWriter.cs" />
+    <Compile Include="EfficientEsapiApp.cs" />
+    <Compile Include="EsapiApp.cs" />
+    <Compile Include="EsapiPlanningItemSummary.cs" />
+    <Compile Include="EsapiPlanningItemType.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IEsapiApp.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="InputData.cs" />
+    <Compile Include="MetricResultSet.cs" />
+    <Compile Include="OnePlanSumPerCourseEnforcer.cs" />
+    <Compile Include="PlanScalingFactors.cs" />
+    <Compile Include="RelativeVolumeDvh.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

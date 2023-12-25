@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using VMS.TPS.Common.Model.API;
 using VMS.TPS.Common.Model.Types;
-//using ChuckDvhBatch;
+using ChuckDvhBatch;
+using System.Diagnostics;
 
 // TODO: Replace the following version attributes by creating AssemblyInfo.cs. You can do this in the properties of the Visual Studio project.
 [assembly: AssemblyVersion("1.0.0.1")]
@@ -65,27 +66,28 @@ namespace BasicStandAlone
 
         static void Execute(Application app)
         {
-            Console.WriteLine("\nEntered Execute() here.\n");
+            var esapiApp = new EfficientEsapiApp(new EsapiApp());
+            esapiApp.LogIn("SysAdmin", "SysAdmin");
 
-            string patientID = "101414412";
+
+            string inputText = "101414412\t\t\t\t";
             //string patientID = "CAP-0003";
 
-            var patient1 = app.OpenPatientById(patientID);
 
-            if(patient1 != null)
-            {
-                Console.WriteLine($"\nPatient {patientID} opened successfully.\n");
-            }
-            else
-            {
-                throw new Exception($"\nPatient {patientID} open failed.\n");
-            }
+            var input = Input.FromText(inputText);
+            
+            var data = new AnalysisData(input);
 
-            var n_courses = patient1.Courses.Count();
+            var analysis = new DvhAnalysis(esapiApp, data);
+            analysis.Analyze();
 
-            Console.WriteLine($"\n{n_courses} courses found in opened patient.\n");
+            Console.WriteLine("Done processing input");
+
+            using (var process = Process.GetCurrentProcess())
+                Console.WriteLine($"Memory used by process: " +
+                    $"{process.WorkingSet64} (working set), " +
+                    $"{process.PrivateMemorySize64} (private)");
+
         }
-
-        
     }
 }
