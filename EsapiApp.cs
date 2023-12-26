@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
 using VMS.TPS.Common.Model.API;
 
 namespace ChuckDvhBatch
 {
     public class EsapiApp : IEsapiApp
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+        
         private Application _app;
         private Patient _patient;
 
@@ -20,13 +18,13 @@ namespace ChuckDvhBatch
             if (_app == null)
                 throw new Exception("Cannot create ESAPI application");
 
-            Logger.Debug("Created ESAPI application");
+            Console.Error.WriteLine("Created ESAPI application");
         }
 
         public void LogOut()
         {
             _app.Dispose();
-            Logger.Debug("Disposed of ESAPI application");
+            Console.Error.WriteLine("Disposed of ESAPI application");
         }
 
         public void OpenPatient(string patientId)
@@ -36,13 +34,13 @@ namespace ChuckDvhBatch
             if (_patient == null)
                 throw new Exception($"Cannot open patient {patientId}");
 
-            Logger.Debug($"Opened patient {patientId}");
+            Console.Error.WriteLine($"Opened patient {patientId}");
         }
 
         public void ClosePatient()
         {
             _app.ClosePatient();
-            Logger.Debug("Closed patient");
+            Console.Error.WriteLine("Closed patient");
         }
 
         public IEnumerable<PlanningItem> GetPatientPlanningItems() =>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
 using VMS.TPS.Common.Model.API;
 
 namespace ChuckDvhBatch
@@ -16,8 +15,6 @@ namespace ChuckDvhBatch
 
     public class EfficientEsapiApp : IEsapiApp
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         private const int CountLimit = 20;
 
         private readonly IEsapiApp _app;
@@ -50,12 +47,12 @@ namespace ChuckDvhBatch
         {
             if (_count >= CountLimit)
             {
-                Logger.Debug($"Reached count limit of {CountLimit}");
+                Console.Error.WriteLine($"Reached count limit of {CountLimit}");
 
                 _app.LogOut();
                 _app.LogIn(_username, _password);
 
-                Logger.Debug("Recreated ESAPI application");
+                Console.Error.WriteLine("Recreated ESAPI application");
 
                 _count = 0;
             }
@@ -80,7 +77,7 @@ namespace ChuckDvhBatch
             {
                 if (planningItemSummary.Type == EsapiPlanningItemType.PlanSum)
                 {
-                    Logger.Debug($"About to re-open patient because planning item [{planningItemSummary.Id}] is a plan sum");
+                    Console.Error.WriteLine($"About to re-open patient because planning item [{planningItemSummary.Id}] is a plan sum");
                     //Console.Error.WriteLine($"\n-- * About to re-open patient because planning item [{planningItemSummary.Id}] is a plan sum");
 
                     ReopenPatient();  // TTT should check if the PlanSum is in the list first maybe? at least later when it is certain that DVH will be calculated for this PlanSum?

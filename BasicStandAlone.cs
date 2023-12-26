@@ -24,30 +24,17 @@ namespace BasicStandAlone
         [STAThread]
         static void Main(string[] args)
         {
-            Console.WriteLine("\nEntered Main() function.\n");
+            Console.Error.WriteLine("\nEntered Main() function.\n");
 
             try
             {
-                using (Application app = Application.CreateApplication())
-                {
-
-                    if(app != null)
-                    {
-                        Console.WriteLine("\nApplication object created successfully.\n");
-                    }
-                    else
-                    {
-                        throw new Exception("\nApplication object creation failed.\n");
-                    }
-
-                    Execute(app);
-                }
+                Execute();
 
                 Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.WriteLine("\n\nScript finished successfully, type any key and press Enter to exit program.\n\n");
+                Console.Error.WriteLine("\n\nScript finished successfully, type any key and press Enter to exit program.\n\n");
 
-                Console.ReadLine();
+                //Console.ReadLine();
 
             }
             catch (Exception e)
@@ -56,7 +43,7 @@ namespace BasicStandAlone
 
                 Console.Error.WriteLine(e.ToString());
 
-                Console.ReadLine();
+                //Console.ReadLine();
 
             }
         }
@@ -64,14 +51,14 @@ namespace BasicStandAlone
 
 
 
-        static void Execute(Application app)
+        static void Execute()
         {
             var esapiApp = new EfficientEsapiApp(new EsapiApp());
             esapiApp.LogIn("SysAdmin", "SysAdmin");
 
 
-            string inputText = "101414412\t\t\t\t";
-            //string patientID = "CAP-0003";
+            string inputText = "$ZAutoPlan_Prostate_02\t$AP\t$auto\tNA\t20\n101414412\t$AP2\t$auto4\tNA\t1";
+            string inputText = "CAP-0003\tC2\t1_CTSim_defa3\tNA\t1";
 
 
             var input = Input.FromText(inputText);
@@ -81,10 +68,10 @@ namespace BasicStandAlone
             var analysis = new DvhAnalysis(esapiApp, data);
             analysis.Analyze();
 
-            Console.WriteLine("Done processing input");
+            Console.Error.WriteLine("Done processing input");
 
             using (var process = Process.GetCurrentProcess())
-                Console.WriteLine($"Memory used by process: " +
+                Console.Error.WriteLine($"Memory used by process: " +
                     $"{process.WorkingSet64} (working set), " +
                     $"{process.PrivateMemorySize64} (private)");
 
