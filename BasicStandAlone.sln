@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicStandAlone", "BasicStandAlone.csproj", "{4BDCA4E3-0BCC-42CE-85C3-D59FCD879FD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChuckDvhBatch", "\\uhrofilespr1\EclipseScripts\Aria15\Development\JY\ChuckDvhBatch\ChuckDvhBatch\ChuckDvhBatch.csproj", "{58CEE1B1-40F7-4BA8-B7B9-E8F46DDE4367}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -17,10 +15,6 @@ Global
 		{4BDCA4E3-0BCC-42CE-85C3-D59FCD879FD1}.Debug|x64.Build.0 = Debug|x64
 		{4BDCA4E3-0BCC-42CE-85C3-D59FCD879FD1}.Release|x64.ActiveCfg = Release|x64
 		{4BDCA4E3-0BCC-42CE-85C3-D59FCD879FD1}.Release|x64.Build.0 = Release|x64
-		{58CEE1B1-40F7-4BA8-B7B9-E8F46DDE4367}.Debug|x64.ActiveCfg = Debug|x64
-		{58CEE1B1-40F7-4BA8-B7B9-E8F46DDE4367}.Debug|x64.Build.0 = Debug|x64
-		{58CEE1B1-40F7-4BA8-B7B9-E8F46DDE4367}.Release|x64.ActiveCfg = Release|x64
-		{58CEE1B1-40F7-4BA8-B7B9-E8F46DDE4367}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

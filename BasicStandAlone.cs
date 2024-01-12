@@ -57,7 +57,7 @@ namespace BasicStandAlone
             esapiApp.LogIn("SysAdmin", "SysAdmin");
 
 
-            string inputText = "$ZAutoPlan_Prostate_02\t$AP\t$auto\tNA\t20\n101414412\t$AP2\t$auto4\tNA\t1";
+            //string inputText = "$ZAutoPlan_Prostate_02\t$AP\t$auto\tNA\t20\n101414412\t$AP2\t$auto4\tNA\t1";
             string inputText = "CAP-0003\tC2\t1_CTSim_defa3\tNA\t1";
 
 
