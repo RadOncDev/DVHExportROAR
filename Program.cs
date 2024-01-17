@@ -18,7 +18,7 @@ using System.Globalization;
 // TODO: Uncomment the following line if the script requires write access.
 // [assembly: ESAPIScript(IsWriteable = true)]
 
-namespace BasicStandAlone
+namespace DVHExportROAR
 {
     class Program
     {

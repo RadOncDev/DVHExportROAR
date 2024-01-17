@@ -71,7 +71,7 @@
   <ItemGroup>
     <Compile Include="AnalysisData.cs" />
     <Compile Include="AnalysisPlan.cs" />
-    <Compile Include="BasicStandAlone.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="DeliveredDoseDVHModel.cs" />
     <Compile Include="DvhAnalysis.cs" />
     <Compile Include="DvhAnalysisWriter.cs" />
