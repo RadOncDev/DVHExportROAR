@@ -41,7 +41,7 @@ namespace ChuckDvhBatch
         {
             Data = data.Split('\n').Where(IsNotEmpty).Select(CreateInputData).Where(t => !string.IsNullOrEmpty(t.PlanSetupId)).ToArray();
 
-            Console.Error.WriteLine($"{Data.Count()}  --  lines from input");
+            //Console.Error.WriteLine($"{Data.Count()}  --  planningItems for this patient from input");
         }
 
         private bool IsNotEmpty(string s) => !string.IsNullOrEmpty(s);
