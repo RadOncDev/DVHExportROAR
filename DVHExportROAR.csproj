@@ -53,9 +53,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="UMRO.Libs.DVHAnalysis-2.0.3.0">
-      <HintPath>\\uhrofilespr1\EclipseScripts\Aria15\Development\JY\Download\temp\chuckdvhbatch\UMRO.Libs.DVHAnalysis\UMRO.Libs.DVHAnalysis-2.0.3.0.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -99,6 +96,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="\\uhrofilespr1\EclipseScripts\Aria15\Development\JY\DVH_Analysis\dvhanalysislib\DVHAnalysis\DVHAnalysis.csproj">
+      <Project>{978f4acd-0018-4ded-a930-2f4e9a9c0721}</Project>
+      <Name>DVHAnalysis</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

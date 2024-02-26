@@ -122,7 +122,7 @@ namespace ChuckDvhBatch
                 }
                 catch (Exception ex)
                 {
-                    Console.Error.WriteLine($"ERROR: Patient [{plan.PatientId}], Course [{plan.PlanningItem.GetCourse().Id}], {plan.Type}, [{plan.Id}], structure {structure.Id}: {ex.Message}");
+                    Console.Error.WriteLine($"ERROR: Patient [{plan.PatientId}], Course [{plan.PlanningItem.GetCourse().Id}], {plan.Type}, [{plan.Id}], structure {structure.Id}: {ex.ToString()}");
                 }
             }
 

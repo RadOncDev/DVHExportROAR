@@ -160,7 +160,7 @@ namespace DVHExportROAR
                 Console.Error.WriteLine("\n\nScript stopped with the above exception.\n\n");
             }
 
-            //Console.ReadLine();
+            Console.ReadLine();
 
         }
     }
