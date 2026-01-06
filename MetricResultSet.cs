@@ -181,7 +181,7 @@ namespace ChuckDvhBatch
 
         private static double[,] GetDoseDvhCurve(DVH dvh)
         {
-            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, 0.1);
+            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, 10);
 
             // Dose, volume pairs
             double[,] results = new double[doses.Length, 2];
