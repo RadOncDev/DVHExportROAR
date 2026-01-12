@@ -1,6 +1,8 @@
+using DVHAnalysis;
 using System;
 using System.Linq;
 using VMS.TPS.Common.Model.API;
+using VMS.TPS.Common.Model.Types;
 
 namespace ChuckDvhBatch
 {
@@ -53,6 +55,17 @@ namespace ChuckDvhBatch
 
                             continue;
                         }
+
+                        if (SystemDoseUnit_TestResult.SystemDoseUnit == VMS.TPS.Common.Model.Types.DoseValue.DoseUnit.Unknown)
+                        {
+                            try
+                            {
+                                SystemDoseUnit_TestResult.SystemDoseUnit = p.TotalDose.Unit;
+
+                                Console.Error.WriteLine($"******************** Detect and record System Dose Unit {SystemDoseUnit_TestResult.SystemDoseUnit.ToString()} *********************");
+                            }
+                            catch { }
+                        }
                     }
 
                     if (planningItem is PlanSum ps)
@@ -70,6 +83,20 @@ namespace ChuckDvhBatch
 
                             continue;
                         }
+
+                        if (SystemDoseUnit_TestResult.SystemDoseUnit == VMS.TPS.Common.Model.Types.DoseValue.DoseUnit.Unknown)
+                        {
+                            try
+                            {
+                                SystemDoseUnit_TestResult.SystemDoseUnit = ps.PlanSetups.First().TotalDose.Unit;
+
+                                Console.Error.WriteLine($"******************** Detect and record System Dose Unit {SystemDoseUnit_TestResult.SystemDoseUnit.ToString()} *********************");
+                            }
+                            catch(Exception ex) {
+                                Console.Error.WriteLine($"******************** Error: Failed to Detect and record System Dose Unit in the first encountered PlanSum {ex} *********************");
+                            }
+                        }
+
                     }
 
                     string plan_type = planningItem is PlanSetup ? "Plan" : "PlanSum";
@@ -139,4 +166,10 @@ namespace ChuckDvhBatch
         private bool IsScriptAborted(Exception e) =>
             e.Message.StartsWith("Script execution was aborted.");
     }
+
+    public static class SystemDoseUnit_TestResult
+    {
+        public static VMS.TPS.Common.Model.Types.DoseValue.DoseUnit SystemDoseUnit = VMS.TPS.Common.Model.Types.DoseValue.DoseUnit.Unknown;
+    }
+
 }

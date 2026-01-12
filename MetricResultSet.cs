@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media.Animation;
 using DVHAnalysis;
 using VMS.TPS.Common.Model.API;
 using VMS.TPS.Common.Model.Types;
@@ -132,7 +133,7 @@ namespace ChuckDvhBatch
             {
                 DoseType = DoseValuePresentation.Absolute,
                 VolumeType = VolumePresentation.AbsoluteCm3,
-                BinSize = 0.001,
+                BinSize = Determine_BinSize(),
             };
 
             var dvhModel = new DeliveredDoseDVHModel(standardDvhModel, scalingFactors);
@@ -155,7 +156,7 @@ namespace ChuckDvhBatch
             {
                 DoseType = DoseValuePresentation.Absolute,
                 VolumeType = VolumePresentation.AbsoluteCm3,
-                BinSize = 0.001,
+                BinSize = Determine_BinSize(),
                 AlphaBeta = alphaBeta
             };
 
@@ -163,6 +164,22 @@ namespace ChuckDvhBatch
 
             return dvhModel.Calculate(eclipseData);
         }
+
+        private static double Determine_BinSize()
+        {
+            if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.Gy)
+            {
+                return 0.1;
+            }
+
+            if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
+            {
+                return 10;
+            }
+
+            throw new Exception("System Dose unit has not been determined (Gy or cGy)");
+        }
+
 
         private static double CalculateDoseToVolume(double volume, DVH dvh)
         {
@@ -181,7 +198,7 @@ namespace ChuckDvhBatch
 
         private static double[,] GetDoseDvhCurve(DVH dvh)
         {
-            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, 10);
+            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, Determine_BinSize());
 
             // Dose, volume pairs
             double[,] results = new double[doses.Length, 2];
