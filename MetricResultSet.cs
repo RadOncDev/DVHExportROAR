@@ -70,7 +70,17 @@ namespace ChuckDvhBatch
 
             try
             {
-                V20Gycc = CalculateVolumeWithDose(20.0, dvh);
+                if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.Gy)
+                {
+                    V20Gycc = CalculateVolumeWithDose(20.0, dvh);
+                }
+
+                if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
+                {
+                    V20Gycc = CalculateVolumeWithDose(2000.0, dvh);
+                }
+
+                V20Gycc = double.NaN;
             }
             catch (Exception)
             {
