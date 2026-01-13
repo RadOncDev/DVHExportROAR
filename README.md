@@ -44,14 +44,14 @@ Clone from GitHub repository [DVHExportROAR](https://github.com/RadOncDev/DVHExp
 Open the solution file **DVHExportROAR.sln** with [Visual Studio](https://visualstudio.microsoft.com/). 
 
 <div style="text-align: center;">
-    <img src="./Doc/images/01_folder_structure.jpg" alt="Sample Image" width="500" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/01_folder_structure.JPG" alt="Sample Image" width="500" style="border: 2px solid gray;"/>
 </div>
 <br>
 
 The code needs to be compiled with x64 configuration. Open **Configuration Manager** and make sure each project have **Platform** set as **x64**.
 
 <div style="text-align: center;">
-    <img src="./Doc/images/02_configurationManager.jpg" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/02_configurationManager.JPG" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
 </div>
 <br>
 
@@ -59,7 +59,7 @@ The code needs to be compiled with x64 configuration. Open **Configuration Manag
 If you don't see **x64** exist in the pulldown list, create it from \<New...\> option.
 
 <div style="text-align: center;">
-    <img src="./Doc/images/02_x64.jpg" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/02_x64.JPG" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
 </div>
 <br>
 
@@ -69,7 +69,7 @@ Create x64 platform by 'Copy settings from' Any CPU. Click OK.
 Make sure **x64** is selected for when you build the solution:
 
 <div style="text-align: center;">
-    <img src="./Doc/images/02_x64_confirm.jpg" alt="Sample Image" width="250" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/02_x64_confirm.JPG" alt="Sample Image" width="250" style="border: 2px solid gray;"/>
 </div>
 <br>
 
@@ -80,7 +80,7 @@ Add reference to two VMS.TPS dll files. (If you are on a thick client where Ecli
 Build the solution/project. You should see the exe produced in `bin\debug`:
 
 <div style="text-align: center;">
-    <img src="./Doc/images/03_buildResult.jpg" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/03_buildResult.JPG" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
 </div>
 <br>
 
@@ -102,9 +102,9 @@ Create a list of plans/plansums you want to process and put it in a file, e.g. p
 <br>
 
 ## Run the script
-Copy `batch.sh` script file from `resouces` folder to `test_set1`. Execute the batch.sh script with 2 arguments: (1) inputlist file (e.g. ./planlist.txt) (2) number of instances to run (this is ideally the number of CPU cores on your machine, I used 2 as an example in the above screenshot).
+Copy `batch.sh` script file from `resources` folder to `test_set1`. Execute the batch.sh script with 2 arguments: (1) inputlist file (e.g. ./planlist.txt) (2) number of instances to run (this is ideally the number of CPU cores on your machine, I used 2 as an example in the above screenshot).
 
-This batch.sh file takes the plan list in planlist.txt, split it into n smaller chunks, and process each one with a CPU core. Each core runs an instance of `DVHExportROAR_v1.2.0.exe` whose standard output is piped into `output_i.txt` file and standard error is piped into `log_i.txt` file.
+This batch.sh file takes the plan list in planlist.txt, splits it into n smaller chunks, and processes each one with a CPU core. Each core runs an instance of `DVHExportROAR_v1.2.0.exe` whose standard output is piped into `output_i.txt` file and standard error is piped into `log_i.txt` file.
 
 In a testing case of processing 5000 plans on a machine with 6 CPU cores and 32GB memory. It took about 12 hours to finish (different core finishes at a different pace)
 
@@ -113,9 +113,9 @@ In a testing case of processing 5000 plans on a machine with 6 CPU cores and 32G
 </div>
 <br>
 
-## Moniter the progress
+## Monitor the progress
 
-You can moniter the progress with command `wc -l * `, which shows how many lines in each file:
+You can monitor the progress with command `wc -l * `, which shows how many lines in each file:
 
 
 <div style="text-align: center;">
@@ -131,7 +131,7 @@ or you can use command `tail *log* -n 50 | grep ')'` to peek the end of the log_
 </div>
 <br>
 
-And you many want to check the Windows TaskManager to see if memory is enough: (memory consumption will keep increasing, if it's not enough, reduce number of plans in the list, or reduce the instance from 6 to 3.)
+And you may want to check the Windows TaskManager to see if memory is enough: (memory consumption will keep increasing, if it's not enough, reduce number of plans in the list, or reduce the instance from 6 to 3.)
 
 
 <div style="text-align: center;">
@@ -150,13 +150,13 @@ Extracted DVH curves are stored in the `output_i.txt` files. Each line contain i
 </div>
 <br>
 
-In the above example, you see dose unit in 'cGy'. After version 1.2.0, all output file has dose unit in Gy, even if the host Ecipse environment has cGy in system setting.
+In the above example, you see dose unit in 'cGy'. After version 1.2.0, all output file has dose unit in Gy, even if the host Eclipse environment has cGy in system setting.
 
 To ensure the completion of the extraction, check the tail of each `log_i.txt` file. You should see the following message:
 
 
 <div style="text-align: center;">
-    <img src="./Doc/images/09_Log_complete.jpg" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/09_Log_complete.JPG" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
 </div>
 <br>
 
