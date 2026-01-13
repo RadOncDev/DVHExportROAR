@@ -56,7 +56,7 @@ The code needs to be compiled with x64 configuration. Open **Configuration Manag
 <br>
 
 
-If you don't see **x64** exist in the pulldown list, create it from \<New...\> option.
+If you don't see **x64** exist in the pulldown list, create it from \<New...\> option. Create x64 platform by 'Copy settings from' Any CPU. Click OK.
 
 <div style="text-align: center;">
     <img src="./Doc/images/02_x64.JPG" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
@@ -64,9 +64,9 @@ If you don't see **x64** exist in the pulldown list, create it from \<New...\> o
 <br>
 
 
-Create x64 platform by 'Copy settings from' Any CPU. Click OK.
 
-Make sure **x64** is selected for when you build the solution:
+
+Make sure **x64** is selected before you build the solution:
 
 <div style="text-align: center;">
     <img src="./Doc/images/02_x64_confirm.JPG" alt="Sample Image" width="250" style="border: 2px solid gray;"/>
@@ -77,7 +77,7 @@ Make sure **x64** is selected for when you build the solution:
 Add reference to two VMS.TPS dll files. (If you are on a thick client where Eclipse is installed locally, this should happen automatically when you build the solution, since the two dlls are already in system GAC. If not, manually locate these two dll on your machine.)
 
 
-Build the solution/project. You should see the exe produced in `bin\debug`:
+Build this solution/project. You should see the exe file produced in `bin\debug`:
 
 <div style="text-align: center;">
     <img src="./Doc/images/03_buildResult.JPG" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
@@ -91,10 +91,10 @@ Build the solution/project. You should see the exe produced in `bin\debug`:
 
 In the same folder with the exe file, create a new folder (e.g. test_set1). Then in a GitBash terminal, change directory (cd) to the 'test_set1' folder:
 
-Create a list of plans/plansums you want to process and put it in a file, e.g. planlist.txt, as in the following example. Requirement for this file are:
+Create a list of plans/plansums you want to process and put it in a text file, e.g. planlist.txt, as in the following example. Requirements for this file are:
 
 1. Each row should have 5 **tab-delimited** columns: PatientMRN (tab) CourseID (tab) Plan/PlanSumID (tab) NA (tab) NFraction. The 4th column is not used (NA is just a placeholder).
-2. Rows need to be sorted by first column **PatientMRN**, so that the plan/plansum of the same patient have to be together.
+2. Rows need to be sorted by first column **PatientMRN**, so that the plans/plansums of the same patient have to stay together.
 
 <div style="text-align: center;">
     <img src="./Doc/images/03_planlist.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
@@ -143,14 +143,14 @@ If error happens, check the log_i.txt files for more detailed info.
 
 # Check the Output
 
-Extracted DVH curves are stored in the `output_i.txt` files. Each line contain info of one DVH curve, which has the following **tab-delimited** columns:
+Extracted DVH curves are stored in the `output_i.txt` files. Each line contains DVH info of one structure, which has the following **tab-delimited** columns:
 
 <div style="text-align: center;">
     <img src="./Doc/images/08_output.png" alt="Sample Image" width="1200" style="border: 2px solid gray;"/>
 </div>
 <br>
 
-In the above example, you see dose unit in 'cGy'. After version 1.2.0, all output file has dose unit in Gy, even if the host Eclipse environment has cGy in system setting.
+In the above example, you see dose data in 'cGy' unit. After version 1.2.0, all output files have dose in Gy, even if the host Eclipse environment has cGy in system setting.
 
 To ensure the completion of the extraction, check the tail of each `log_i.txt` file. You should see the following message:
 
