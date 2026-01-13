@@ -74,13 +74,14 @@ namespace ChuckDvhBatch
                 {
                     V20Gycc = CalculateVolumeWithDose(20.0, dvh);
                 }
-
-                if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
+                else if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
                 {
                     V20Gycc = CalculateVolumeWithDose(2000.0, dvh);
                 }
-
-                V20Gycc = double.NaN;
+                else
+                {
+                    V20Gycc = double.NaN;
+                }
             }
             catch (Exception)
             {
@@ -179,6 +180,22 @@ namespace ChuckDvhBatch
         {
             if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.Gy)
             {
+                return 0.01;
+            }
+
+            if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
+            {
+                return 1;
+            }
+
+            throw new Exception("System Dose unit has not been determined (Gy or cGy)");
+        }
+
+
+        private static double Determine_Output_BinSize()
+        {
+            if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.Gy)
+            {
                 return 0.1;
             }
 
@@ -189,7 +206,6 @@ namespace ChuckDvhBatch
 
             throw new Exception("System Dose unit has not been determined (Gy or cGy)");
         }
-
 
         private static double CalculateDoseToVolume(double volume, DVH dvh)
         {
@@ -208,7 +224,7 @@ namespace ChuckDvhBatch
 
         private static double[,] GetDoseDvhCurve(DVH dvh)
         {
-            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, Determine_BinSize());
+            double[] doses = GetRegularDoses(0.0, dvh.MaxDose, Determine_Output_BinSize());
 
             // Dose, volume pairs
             double[,] results = new double[doses.Length, 2];

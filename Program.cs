@@ -10,10 +10,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Globalization;
 
-// TODO: Replace the following version attributes by creating AssemblyInfo.cs. You can do this in the properties of the Visual Studio project.
-[assembly: AssemblyVersion("1.0.0.1")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
-[assembly: AssemblyInformationalVersion("1.0")]
+//// TODO: Replace the following version attributes by creating AssemblyInfo.cs. You can do this in the properties of the Visual Studio project.
+//[assembly: AssemblyVersion("1.0.0.1")]
+//[assembly: AssemblyFileVersion("1.0.0.1")]
+//[assembly: AssemblyInformationalVersion("1.0")]
 
 // TODO: Uncomment the following line if the script requires write access.
 // [assembly: ESAPIScript(IsWriteable = true)]
@@ -160,7 +160,7 @@ namespace DVHExportROAR
                 Console.Error.WriteLine("\n\nScript stopped with the above exception.\n\n");
             }
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
         }
     }

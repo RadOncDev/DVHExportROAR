@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BasicStandAlone</RootNamespace>
-    <AssemblyName>DVHExportROAR</AssemblyName>
+    <AssemblyName>DVHExportROAR_v1.2.0</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -83,6 +83,7 @@
     <Compile Include="MetricResultSet.cs" />
     <Compile Include="OnePlanSumPerCourseEnforcer.cs" />
     <Compile Include="PlanScalingFactors.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelativeVolumeDvh.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Animation;
 using VMS.TPS.Common.Model.API;
+using VMS.TPS.Common.Model.Types;
 
 namespace ChuckDvhBatch
 {
@@ -9,8 +11,15 @@ namespace ChuckDvhBatch
     {
         private const char OutputFieldSeparator = '\t';
 
+        private static bool ifcGy = SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy;
+
         public static void WriteToConsole(MetricResultSet results)
         {
+            if(ifcGy == false && SystemDoseUnit_TestResult.SystemDoseUnit != DoseValue.DoseUnit.Gy)
+            {
+                Console.Error.WriteLine($"******************** Fatal Error: System Dose Unit is neither Gy or cGy *********************");
+            }
+
             var planningItem = results.PlanningItem;
             var structure = results.Structure;
 
@@ -18,6 +27,18 @@ namespace ChuckDvhBatch
             string planUIDs = planningItem is PlanSetup
                 ? ((PlanSetup)planningItem).UID
                 : GetPlanSetupUids((PlanSum)planningItem);
+
+            if(ifcGy == true)
+            {
+                results.D0p05ccGy /= 100;
+                results.DC0p05ccGy /= 100;
+
+                results.MinDose /= 100;
+                results.MaxDose /= 100;
+                results.MeanDose /= 100;
+                results.MedianDose /= 100;
+                results.StdDevDose /= 100;
+            }
 
             var D0p05ccGy = double.IsNaN(results.D0p05ccGy) ? "" : results.D0p05ccGy.ToString("F4");
             var DC0p05ccGy = double.IsNaN(results.DC0p05ccGy) ? "" : results.DC0p05ccGy.ToString("F4");
@@ -70,7 +91,14 @@ namespace ChuckDvhBatch
 
             for (int i = 0; i < dvhCurve.GetLength(0); i++)
             {
-                sb.AppendFormat("{0:F4},{1:F4}", dvhCurve[i, 0], dvhCurve[i, 1]);
+                if(ifcGy == true)
+                {
+                    sb.AppendFormat("{0:F4},{1:F4}", dvhCurve[i, 0] / 100, dvhCurve[i, 1]);
+                }
+                else
+                {
+                    sb.AppendFormat("{0:F4},{1:F4}", dvhCurve[i, 0], dvhCurve[i, 1]);
+                }
 
                 // Except for the last dose/volume, add separator
                 if (i != dvhCurve.GetLength(0) - 1)
