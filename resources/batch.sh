@@ -39,6 +39,6 @@ done < "$filename_org"
 
 for i in $(seq 1 $number_of_files)
 do
-    ../DVHExportROAR.exe ./"${filename}_part${i}.txt" > "${filename}_part${i}_output.txt" 2> "${filename}_part${i}_log.txt" &
+    ../DVHExportROAR_v1.2.0.exe ./"${filename}_part${i}.txt" > "${filename}_part${i}_output.txt" 2> "${filename}_part${i}_log.txt" &
 done
 
