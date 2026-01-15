@@ -56,7 +56,7 @@ The code needs to be compiled with x64 configuration. Open **Configuration Manag
 <br>
 
 
-If you don't see **x64** exist in the pulldown list, create it from \<New...\> option. Create x64 platform by 'Copy settings from' Any CPU. Click OK.
+If you don't see **x64** exist in the pulldown list, create it from **\<New...\>** option. Create x64 platform by 'Copy settings from Any CPU'. Then click OK.
 
 <div style="text-align: center;">
     <img src="./Doc/images/02_x64.JPG" alt="Sample Image" width="400" style="border: 2px solid gray;"/>
@@ -74,10 +74,19 @@ Make sure **x64** is selected before you build the solution:
 <br>
 
  
-Add reference to two VMS.TPS dll files. (If you are on a thick client where Eclipse is installed locally, this should happen automatically when you build the solution, since the two dlls are already in system GAC. If not, manually locate these two dll on your machine.)
+Add reference to two Varian VMS.TPS dll files. (If you are on a thick client where Eclipse is installed locally, this should happen automatically when you build the solution, since the two dlls are already in system GAC. If not, manually locate these two dll files on your machine.)
+
+Dll file for reference `UMRO.Libs.DVHAnalysis-2.0.3.1.dll` is located in the `resources` sub folder.
+
+<div style="text-align: center;">
+    <img src="./Doc/images/03_reference.JPG" alt="Sample Image" width="350" style="border: 2px solid gray;"/>
+</div>
+<br>
+
+ 
 
 
-Build this solution/project. You should see the exe file produced in `bin\debug`:
+Build this solution/project. You should see the `DVHExportROAR_v1.2.0.exe` file produced in `bin\debug`:
 
 <div style="text-align: center;">
     <img src="./Doc/images/03_buildResult.JPG" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
@@ -101,10 +110,26 @@ Create a list of plans/plansums you want to process and put it in a text file, e
 </div>
 <br>
 
+There is an example `planlist.txt` file located in `resources` sub folder
+
 ## Run the script
+We need to execute the compiled `DVHExportROAR_v1.2.0.exe` file in a terminal to get DVH. We recommand `Git Bash` terminal interface on Windows machine, which comes with installing Git on Windows. All the following screenshot are from Git Bash on Windows.
+
 Copy `batch.sh` script file from `resources` folder to `test_set1`. Execute the batch.sh script with 2 arguments: (1) inputlist file (e.g. ./planlist.txt) (2) number of instances to run (this is ideally the number of CPU cores on your machine, I used 2 as an example in the above screenshot).
 
-This batch.sh file takes the plan list in planlist.txt, splits it into n smaller chunks, and processes each one with a CPU core. Each core runs an instance of `DVHExportROAR_v1.2.0.exe` whose standard output is piped into `output_i.txt` file and standard error is piped into `log_i.txt` file.
+In the `batch.sh` file, the plan list in `planlist.txt` file is splited into n smaller chunks, and each chuck is given to an instance of `DVHExportROAR_v1.2.0.exe` to execute on a CPU core. The standard output of `DVHExportROAR_v1.2.0.exe` is piped (>) into `i_output.txt` file and standard error is piped (2>) into `i_log.txt` file. (as shown in the following section of `batch.sh`)
+
+<div style="text-align: center;">
+    <img src="./Doc/images/04_bashfile.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
+</div>
+<br>
+
+You can execute `DVHExportROAR_v1.2.0.exe` directly in a terminal as well, to test its function or to make up for a failed CPU core from a batch run:
+
+<div style="text-align: center;">
+    <img src="./Doc/images/04_singleRun.png" alt="Sample Image" width="1000" style="border: 2px solid gray;"/>
+</div>
+<br>
 
 In a testing case of processing 5000 plans on a machine with 6 CPU cores and 32GB memory. It took about 12 hours to finish (different core finishes at a different pace)
 
@@ -123,7 +148,7 @@ You can monitor the progress with command `wc -l * `, which shows how many lines
 </div>
 <br>
 
-or you can use command `tail *log* -n 50 | grep ')'` to peek the end of the log_i.txt files. In the following example, (318/529) shows the 318th patient out of 535 total is now being processed in this CPU instance:
+or you can use command `tail *log* -n 50 | grep ')'` to peek the end of the i_log.txt files. In the following example, (318/529) shows the 318th patient out of 535 total is now being processed in this CPU instance:
 
 
 <div style="text-align: center;">
@@ -139,11 +164,11 @@ And you may want to check the Windows TaskManager to see if memory is enough: (m
 </div>
 <br>
 
-If error happens, check the log_i.txt files for more detailed info.
+If error happens, check the i_log.txt files for more detailed info.
 
 # Check the Output
 
-Extracted DVH curves are stored in the `output_i.txt` files. Each line contains DVH info of one structure, which has the following **tab-delimited** columns:
+Extracted DVH curves are stored in the `i_output.txt` files. Each line contains DVH info of one structure, which has the following **tab-delimited** columns:
 
 <div style="text-align: center;">
     <img src="./Doc/images/08_output.png" alt="Sample Image" width="1200" style="border: 2px solid gray;"/>
@@ -152,7 +177,7 @@ Extracted DVH curves are stored in the `output_i.txt` files. Each line contains 
 
 In the above example, you see dose data in 'cGy' unit. After version 1.2.0, all output files have dose in Gy, even if the host Eclipse environment has cGy in system setting.
 
-To ensure the completion of the extraction, check the tail of each `log_i.txt` file. You should see the following message:
+To ensure the completion of the extraction, check the tail of each `i_log.txt` file. You should see the following message:
 
 
 <div style="text-align: center;">
