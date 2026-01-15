@@ -98,24 +98,30 @@ Build this solution/project. You should see the `DVHExportROAR_v1.2.0.exe` file 
 
 ## Set up folder and prepare input file of plan list
 
-In the same folder with the exe file, create a new folder (e.g. test_set1). Then in a GitBash terminal, change directory (cd) to the 'test_set1' folder:
-
 Create a list of plans/plansums you want to process and put it in a text file, e.g. planlist.txt, as in the following example. Requirements for this file are:
 
 1. Each row should have 5 **tab-delimited** columns: PatientMRN (tab) CourseID (tab) Plan/PlanSumID (tab) NA (tab) NFraction. The 4th column is not used (NA is just a placeholder).
 2. Rows need to be sorted by first column **PatientMRN**, so that the plans/plansums of the same patient have to stay together.
 
 <div style="text-align: center;">
-    <img src="./Doc/images/03_planlist.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
+    <img src="./Doc/images/03_planlist.png" alt="Sample Image" width="600" style="border: 2px solid gray;"/>
 </div>
 <br>
 
 There is an example `planlist.txt` file located in `resources` sub folder
 
 ## Run the script
+
 We need to execute the compiled `DVHExportROAR_v1.2.0.exe` file in a terminal to get DVH. We recommand `Git Bash` terminal interface on Windows machine, which comes with installing Git on Windows. All the following screenshot are from Git Bash on Windows.
 
-Copy `batch.sh` script file from `resources` folder to `test_set1`. Execute the batch.sh script with 2 arguments: (1) inputlist file (e.g. ./planlist.txt) (2) number of instances to run (this is ideally the number of CPU cores on your machine, I used 2 as an example in the above screenshot).
+In the same folder with the exe file, create a new folder (e.g. test_set1). Then in a Git Bash terminal, change directory (cd) to the `test_set1` folder:
+
+Copy `batch.sh` script file from `resources` folder to `test_set1`. Execute the batch.sh script with 2 arguments: (1) inputlist file (e.g. ./planlist.txt) (2) number of instances to run (this is ideally the number of CPU cores on your machine, I used 6 as an example in the screenshot below).
+
+<div style="text-align: center;">
+    <img src="./Doc/images/04_6cores.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
+</div>
+<br>
 
 In the `batch.sh` file, the plan list in `planlist.txt` file is splited into n smaller chunks, and each chuck is given to an instance of `DVHExportROAR_v1.2.0.exe` to execute on a CPU core. The standard output of `DVHExportROAR_v1.2.0.exe` is piped (>) into `i_output.txt` file and standard error is piped (2>) into `i_log.txt` file. (as shown in the following section of `batch.sh`)
 
@@ -124,7 +130,7 @@ In the `batch.sh` file, the plan list in `planlist.txt` file is splited into n s
 </div>
 <br>
 
-You can execute `DVHExportROAR_v1.2.0.exe` directly in a terminal as well, to test its function or to make up for a failed CPU core from a batch run:
+You can execute `DVHExportROAR_v1.2.0.exe` directly in a terminal as well, to test its function or to make up for a failed CPU core from a batch run (you will need to check the i_log.txt file to see where the failure happened and truncate the i_input_list file from there):
 
 <div style="text-align: center;">
     <img src="./Doc/images/04_singleRun.png" alt="Sample Image" width="1000" style="border: 2px solid gray;"/>
@@ -133,10 +139,7 @@ You can execute `DVHExportROAR_v1.2.0.exe` directly in a terminal as well, to te
 
 In a testing case of processing 5000 plans on a machine with 6 CPU cores and 32GB memory. It took about 12 hours to finish (different core finishes at a different pace)
 
-<div style="text-align: center;">
-    <img src="./Doc/images/04_6cores.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
-</div>
-<br>
+
 
 ## Monitor the progress
 
