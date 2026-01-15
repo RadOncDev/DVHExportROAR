@@ -123,7 +123,7 @@ Copy `batch.sh` script file from `resources` folder to `test_set1`. Execute the 
 </div>
 <br>
 
-In the `batch.sh` file, the plan list in `planlist.txt` file is splited into n smaller chunks, and each chuck is given to an instance of `DVHExportROAR_v1.2.0.exe` to execute on a CPU core. The standard output of `DVHExportROAR_v1.2.0.exe` is piped (>) into `i_output.txt` file and standard error is piped (2>) into `i_log.txt` file. (as shown in the following section of `batch.sh`)
+In the `batch.sh` file, the plan list in `planlist.txt` file is splited into n smaller chunks, and each chunk is given to an instance of `DVHExportROAR_v1.2.0.exe` to execute on a CPU core. The standard output of `DVHExportROAR_v1.2.0.exe` is piped (>) into `i_output.txt` file and standard error is piped (2>) into `i_log.txt` file. (as shown in the following section of `batch.sh`)
 
 <div style="text-align: center;">
     <img src="./Doc/images/04_bashfile.png" alt="Sample Image" width="800" style="border: 2px solid gray;"/>
