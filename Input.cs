@@ -64,7 +64,7 @@ namespace ChuckDvhBatch
         private void Validate(string[] tokens)
         {
             if (tokens.Length != NumberOfFields)
-                throw new InvalidOperationException($"Input line does not have {NumberOfFields} fields. {tokens.Length}, ***{tokens[0]}***");
+                throw new InvalidOperationException($"Input line does not have {NumberOfFields} fields. It has [{tokens.Length}]. First field is [{tokens[0]}]");
         }
     }
 }

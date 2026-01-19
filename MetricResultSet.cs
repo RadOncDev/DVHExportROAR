@@ -180,12 +180,12 @@ namespace ChuckDvhBatch
         {
             if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.Gy)
             {
-                return 0.01;
+                return 0.001;
             }
 
             if (SystemDoseUnit_TestResult.SystemDoseUnit == DoseValue.DoseUnit.cGy)
             {
-                return 1;
+                return 0.1;
             }
 
             throw new Exception("System Dose unit has not been determined (Gy or cGy)");
