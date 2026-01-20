@@ -41,6 +41,8 @@ The software is solely for non-commercial, non-clinical research and education u
 
 Clone from GitHub repository [DVHExportROAR](https://github.com/RadOncDev/DVHExportROAR) to a local machine where Varian Eclipse treatment planning system is installed (thick Eclipse client).
 
+The code should be located in a local drive on the computer (e.g. C:/ D:/). Residing on a Remote network drive (like T:/ Z:/) can cause unexplained issues in building/executing the code.
+
 Open the solution file **DVHExportROAR.sln** with [Visual Studio](https://visualstudio.microsoft.com/). 
 
 <div style="text-align: center;">
